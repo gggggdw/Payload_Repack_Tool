@@ -60,6 +60,7 @@ jobs:
         ./repackZip.sh
         split -b 1900M --numeric-suffixes --suffix-length=2 output/OTA.zip rom.z
         echo "cat $(ls rom.z* | tr '\n' ' ') > newrom.zip" > Merge.sh
+        sha256sum rom.z* > roms.sha256
       id: pwd
 
     - name: Upload to Release
@@ -68,6 +69,7 @@ jobs:
         files: | 
           rom.z*
           Merge.sh
+          roms.sha256
         name: ${{ github.run_id }}
         tag_name: ${{ github.run_id }}
         body: |
