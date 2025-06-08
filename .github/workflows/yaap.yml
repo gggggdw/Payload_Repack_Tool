@@ -32,12 +32,12 @@ jobs:
       - name: Download
         run: |
           cd work-space
-          wget -O yaap.zip "${{ github.event.inputs.ROM_URL }}"
-          sha256sum yaap.zip > roms.sha256
+          aria2c -d input -o update.zip -j 5 -x 16 "${{ github.event.inputs.ROM_URL }}"
+          sha256sum update.zip > roms.sha256
 
       - name: Split
         run: |
-          split -b 1900M --numeric-suffixes --suffix-length=2 yaap.zip rom.z
+          split -b 1900M --numeric-suffixes --suffix-length=2 update.zip rom.z
           echo "cat $(ls rom.z* | tr '\n' ' ') > newrom.zip" > Merge.sh
           
       - name: Upload to Release
