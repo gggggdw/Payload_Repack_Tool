@@ -47,9 +47,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: | 
-            rom.z*
-            Merge.sh
-            roms.sha256
+            work-space/rom.z*
+            work-space/Merge.sh
+            work-space/roms.sha256
           name: ${{ github.run_id }}
           tag_name: ${{ github.run_id }}
           body: |
