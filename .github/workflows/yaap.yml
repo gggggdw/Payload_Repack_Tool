@@ -32,6 +32,8 @@ jobs:
       - name: Download
         run: |
           cd work-space
+          mkdir input
+          echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
           aria2c -d input -o update.zip -j 5 -x 16 "${{ github.event.inputs.ROM_URL }}"
           sha256sum update.zip > roms.sha256
 
